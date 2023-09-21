@@ -1,12 +1,15 @@
 using Distributions
-using Flux
-using Flux: @functor
-using Flux.Losses: mse
-using Flux.Optimise: ADAM, update!
-using ProgressMeter
-using Random
+using BSON
 using CUDA
-using Logging
+using Flux
+using Flux: @functor, chunk
+using Flux.Losses: logitbinarycrossentropy
+using Flux.Data: DataLoader
+using Logging: with_logger
+using Parameters: @with_kw
+using ProgressMeter: Progress, next!
+using TensorBoardLogger: TBLogger, tb_overwrite
+using Random
 """
     samplePrice(
         phi::Float64 = 0.2,
