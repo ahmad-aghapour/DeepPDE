@@ -1,4 +1,4 @@
-# Deep Stochastic Optimization in Finance Replication
+# Deep Stochastic Optimization in Finance Replication (Option Pricing)
 
 This repository contains implementations to replicate the results of the paper "Deep stochastic optimization in finance" for option pricing.
 
