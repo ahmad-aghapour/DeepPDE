@@ -17,10 +17,10 @@ This repository provides implementation and solutions for Partial Differential E
 
 The repository is structured into four primary files/folders:
 
-- **`Equation.py`**: Contains definitions and functions related to PDEs involved in option pricing.
+- **`Equation.py`**: Contains definitions and functions related to PDEs.
 - **`Model.py`**: Includes the implementation of the Deep Time Neural Network architecture.
 - **`Solver.py`**: Features a solver class that accepts PDEs and offers methods to solve them.
-- **`deep_time_neural_network.ipynb`**: A Jupyter Notebook for executing the code and printing results.
+- **`Deep_Time_Neural_Network.ipynb`**: A Jupyter Notebook for executing the code and printing results.
 
 ## Installation
 
