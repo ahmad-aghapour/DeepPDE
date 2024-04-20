@@ -88,10 +88,9 @@ The defualt rate is described by the function $Q(Y_t)$, which is defined as:
 
 
 $$\begin{align*}
-Q(y) &= \mathbb{I}_{\left(-\infty, v^h\right)}(y) \gamma^h + \mathbb{I}_{\left[v^l, \infty\right)}(y) \gamma^l \nonumber \\
+Q(y) &= \mathbb{I}_{\left(-\infty, v^h\right)}(y) \gamma^h + \mathbb{I}_{\left[v^l, \infty\right)}(y) \gamma^l  \\
 &+ \mathbb{I}_{\left[v^h, v^l\right)}(y)\left[\frac{\left(\gamma^h - \gamma^l\right)}{\left(v^h - v^l\right)}\left(y - v^h\right) + \gamma^h\right].
-\end{align*}
-$$
+\end{align*}$$
 
 ### Parameters
 
@@ -117,13 +116,12 @@ $$
 In this subsection, we explore option pricing under the assumption of different borrowing and lending rates. Incorporating these rates into the model allows us to investigate the potential impact of varying financing conditions on option prices:
 
 $$\begin{align*}
-& dX_t = \bar{\mu} X_t dt + \bar{\sigma} \text{diag}(X_t) dW_t, \nonumber \\
-& X_0 = \xi, \nonumber \\
-& dY_t = \Bigl(R^l Y_t + \frac{(\bar{\mu} - R^l)}{\bar{\sigma}} \sum_{i=1}^d z_i \nonumber \\
-& \quad + (R^l - R^b) \max \left\{0, \left[\frac{1}{\bar{\sigma}} \sum_{i=1}^d z_i\right] - Y_t\right\}\Bigr) dt + Z_t^T dW_t, \nonumber \\
+& dX_t = \bar{\mu} X_t dt + \bar{\sigma} \text{diag}(X_t) dW_t,  \\
+& X_0 = \xi,  \\
+& dY_t = \Bigl(R^l Y_t + \frac{(\bar{\mu} - R^l)}{\bar{\sigma}} \sum_{i=1}^d z_i \\
+& \quad + (R^l - R^b) \max \left\{0, \left[\frac{1}{\bar{\sigma}} \sum_{i=1}^d z_i\right] - Y_t\right\}\Bigr) dt + Z_t^T dW_t,  \\
 & Y_T = g\left(X_T\right).
-\end{align*}
-$$
+\end{align*}$$
 
 The option price, $Y_t$, is governed by a different stochastic differential equation that includes lending rate $R^l$ and borrowing rate $R^b$. The lending rate is typically lower than the borrowing rate, as lending money is considered cheaper. The equation also includes a term representing the excess return scaled by volatility and the sum of the elements $z_i$ from 1 to $d$. The max operator ensures that the term inside the brackets remains non-negative, as it captures the potential payoff resulting from the difference between the lending and borrowing rates.
 
@@ -244,14 +242,12 @@ In the realm of optimal control, the Hamilton-Jacobi-Bellman (HJB) equation serv
 
 For the experiment, we consider the following FBSDEs, which exemplify the application of the HJB equation in a stochastic setting:
 
-$$
-\begin{align*}
+$$\begin{align*}
     & dX_t = \sigma dW_t, \quad t \in[0, T], \\
     & X_0 = \xi, \\
     & dY_t =\frac{\|Z_t\|^2}{\sigma^2} dt +  Z_t^\prime dW_t, \quad t \in[0, T), \\
     & Y_T = g(X_T),
-\end{align*}
-$$
+\end{align*}$$
 
 ### Parameters
 
@@ -260,9 +256,7 @@ $$
 - **ξ**: (0, 0, ..., 0) ∈ $ℝ^{100}$ - The initial state vector, indicating the starting condition.
 
 also 
-$$
-g(x)=\ln \left(0.5\left(1+\|x\|^2\right)\right) 
-$$
+$$g(x)=\ln \left(0.5\left(1+\|x\|^2\right)\right)$$
 
 with the terminal condition $u(T, x) = g(x)$.
 <p align="center">
