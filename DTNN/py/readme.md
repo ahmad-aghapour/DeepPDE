@@ -89,8 +89,10 @@ The defualt rate is described by the function $Q(Y_t)$, which is defined as:
 
 $$
 \begin{align*}
+
 Q(y) &= \mathbb{I}_{\left(-\infty, v^h\right)}(y) \gamma^h + \mathbb{I}_{\left[v^l, \infty\right)}(y) \gamma^l  \\
 & + \mathbb{I}_{\left[v^h, v^l\right)}(y)\left[\frac{\left(\gamma^h - \gamma^l\right)}{\left(v^h - v^l\right)}\left(y - v^h\right) + \gamma^h \right].
+
 \end{align*}
 $$
 
@@ -119,11 +121,13 @@ In this subsection, we explore option pricing under the assumption of different 
 
 $$
 \begin{align*}
+
 & dX_t = \bar{\mu} X_t dt + \bar{\sigma} \text{diag}(X_t) dW_t,  \\
 & X_0 = \xi,  \\
 & dY_t = \Bigl(R^l Y_t + \frac{(\bar{\mu} - R^l)}{\bar{\sigma}} \sum_{i=1}^d z_i \\
 & \quad + (R^l - R^b) \max \left\{0, \left[\frac{1}{\bar{\sigma}} \sum_{i=1}^d z_i\right] - Y_t\right\}\Bigr) dt + Z_t^T dW_t,  \\
 & Y_T = g\left(X_T\right).
+
 \end{align*}
 $$
 
