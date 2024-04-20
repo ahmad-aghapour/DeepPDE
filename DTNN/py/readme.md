@@ -86,8 +86,8 @@ $$
 
 The defualt rate is described by the function $Q(Y_t)$, which is defined as:
 
-$$
-\begin{align*}
+
+$$\begin{align*}
 Q(y) &= \mathbb{I}_{\left(-\infty, v^h\right)}(y) \gamma^h + \mathbb{I}_{\left[v^l, \infty\right)}(y) \gamma^l \nonumber \\
 &+ \mathbb{I}_{\left[v^h, v^l\right)}(y)\left[\frac{\left(\gamma^h - \gamma^l\right)}{\left(v^h - v^l\right)}\left(y - v^h\right) + \gamma^h\right].
 \end{align*}
@@ -116,8 +116,7 @@ $$
 
 In this subsection, we explore option pricing under the assumption of different borrowing and lending rates. Incorporating these rates into the model allows us to investigate the potential impact of varying financing conditions on option prices:
 
-$$
-\begin{align*}
+$$\begin{align*}
 & dX_t = \bar{\mu} X_t dt + \bar{\sigma} \text{diag}(X_t) dW_t, \nonumber \\
 & X_0 = \xi, \nonumber \\
 & dY_t = \Bigl(R^l Y_t + \frac{(\bar{\mu} - R^l)}{\bar{\sigma}} \sum_{i=1}^d z_i \nonumber \\
@@ -125,6 +124,7 @@ $$
 & Y_T = g\left(X_T\right).
 \end{align*}
 $$
+
 The option price, $Y_t$, is governed by a different stochastic differential equation that includes lending rate $R^l$ and borrowing rate $R^b$. The lending rate is typically lower than the borrowing rate, as lending money is considered cheaper. The equation also includes a term representing the excess return scaled by volatility and the sum of the elements $z_i$ from 1 to $d$. The max operator ensures that the term inside the brackets remains non-negative, as it captures the potential payoff resulting from the difference between the lending and borrowing rates.
 
 ###  Parameters
