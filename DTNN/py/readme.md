@@ -72,6 +72,7 @@ loss , init = fastsolver.solve(iterations,128,(40 + torch.rand(1)*10).to(device)
 To visualize the results, refer to the `DTNN.ipynb` notebook or execute the code in your preferred environment.
 ## Option Pricing with Default Risk
 The stock price $X_t$ evolves according to the following stochastic differential equation:
+
 $$
 \begin{align*}
 & dX_t = \bar{\mu} X_t dt + \bar{\sigma}\text{diag}(X_t) dW_t, \nonumber\\
@@ -80,15 +81,18 @@ $$
 & Y_T = g\left(X_T\right).
 \end{align*}
 $$
+
 ### Option Price Equation
 
 The defualt rate is described by the function $Q(Y_t)$, which is defined as:
+
 $$
 \begin{align*}
 Q(y) &= \mathbb{I}_{\left(-\infty, v^h\right)}(y) \gamma^h + \mathbb{I}_{\left[v^l, \infty\right)}(y) \gamma^l \nonumber \\
 &+ \mathbb{I}_{\left[v^h, v^l\right)}(y)\left[\frac{\left(\gamma^h - \gamma^l\right)}{\left(v^h - v^l\right)}\left(y - v^h\right) + \gamma^h\right].
 \end{align*}
 $$
+
 ### Parameters
 
 - Time horizon, $T = 1$
