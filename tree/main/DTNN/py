@@ -1,0 +1,832 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "toc_visible": true,
+      "authorship_tag": "ABX9TyPIronCeXT7EF3+YG4WnKoO",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/ahmad-aghapour/DeepPDE/blob/main/tree/main/DTNN/py\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "DsTXY0DyvaEE",
+        "outputId": "e492fabe-54f8-4863-e1a5-f5cc2238e9f1"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting RiskLabAI\n",
+            "  Downloading RiskLabAI-0.0.78-py3-none-any.whl (131 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m131.9/131.9 kB\u001b[0m \u001b[31m1.4 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hRequirement already satisfied: scipy in /usr/local/lib/python3.10/dist-packages (from RiskLabAI) (1.11.4)\n",
+            "Collecting ta (from RiskLabAI)\n",
+            "  Downloading ta-0.11.0.tar.gz (25 kB)\n",
+            "  Preparing metadata (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "Collecting quantecon (from RiskLabAI)\n",
+            "  Downloading quantecon-0.7.2-py3-none-any.whl (215 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m215.4/215.4 kB\u001b[0m \u001b[31m5.0 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hRequirement already satisfied: numba>=0.49.0 in /usr/local/lib/python3.10/dist-packages (from quantecon->RiskLabAI) (0.58.1)\n",
+            "Requirement already satisfied: numpy>=1.17.0 in /usr/local/lib/python3.10/dist-packages (from quantecon->RiskLabAI) (1.25.2)\n",
+            "Requirement already satisfied: requests in /usr/local/lib/python3.10/dist-packages (from quantecon->RiskLabAI) (2.31.0)\n",
+            "Requirement already satisfied: sympy in /usr/local/lib/python3.10/dist-packages (from quantecon->RiskLabAI) (1.12)\n",
+            "Requirement already satisfied: pandas in /usr/local/lib/python3.10/dist-packages (from ta->RiskLabAI) (2.0.3)\n",
+            "Requirement already satisfied: llvmlite<0.42,>=0.41.0dev0 in /usr/local/lib/python3.10/dist-packages (from numba>=0.49.0->quantecon->RiskLabAI) (0.41.1)\n",
+            "Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/lib/python3.10/dist-packages (from pandas->ta->RiskLabAI) (2.8.2)\n",
+            "Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.10/dist-packages (from pandas->ta->RiskLabAI) (2023.4)\n",
+            "Requirement already satisfied: tzdata>=2022.1 in /usr/local/lib/python3.10/dist-packages (from pandas->ta->RiskLabAI) (2024.1)\n",
+            "Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.10/dist-packages (from requests->quantecon->RiskLabAI) (3.3.2)\n",
+            "Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.10/dist-packages (from requests->quantecon->RiskLabAI) (3.7)\n",
+            "Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests->quantecon->RiskLabAI) (2.0.7)\n",
+            "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests->quantecon->RiskLabAI) (2024.2.2)\n",
+            "Requirement already satisfied: mpmath>=0.19 in /usr/local/lib/python3.10/dist-packages (from sympy->quantecon->RiskLabAI) (1.3.0)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.10/dist-packages (from python-dateutil>=2.8.2->pandas->ta->RiskLabAI) (1.16.0)\n",
+            "Building wheels for collected packages: ta\n",
+            "  Building wheel for ta (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "  Created wheel for ta: filename=ta-0.11.0-py3-none-any.whl size=29411 sha256=383a9e7289b8e31244c99b85bae83bbf33633c90ed2a1c331dd389c7f5cfd437\n",
+            "  Stored in directory: /root/.cache/pip/wheels/5f/67/4f/8a9f252836e053e532c6587a3230bc72a4deb16b03a829610b\n",
+            "Successfully built ta\n",
+            "Installing collected packages: quantecon, ta, RiskLabAI\n",
+            "Successfully installed RiskLabAI-0.0.78 quantecon-0.7.2 ta-0.11.0\n"
+          ]
+        }
+      ],
+      "source": [
+        "! pip install RiskLabAI"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import plotly.graph_objects as go\n",
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "import torch\n",
+        "import torch.nn.functional as F\n",
+        "from torch import nn, Tensor\n",
+        "from torch.nn import Module, Linear, BatchNorm1d, Tanh\n",
+        "from numba import cuda\n",
+        "from torch import autograd\n",
+        "import torch.nn as nn\n",
+        "import torch.nn.functional as F\n",
+        "import math\n"
+      ],
+      "metadata": {
+        "id": "9V2b_t26vio5"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "device = torch.device('cuda')\n",
+        "iterations = 1500\n",
+        "experiments = 5"
+      ],
+      "metadata": {
+        "id": "0D4ER_Vkvtfh"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from RiskLabAI.pde.solver import FBSNNolver\n",
+        "from RiskLabAI.pde.solver import FBSDESolver"
+      ],
+      "metadata": {
+        "id": "4ayBvpqIwE2J"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def plot_and_save_result(pde, name = 'default_main'):\n",
+        "\n",
+        "  dtnnloss = []\n",
+        "  dtnninit = []\n",
+        "\n",
+        "  for i in range(experiments):\n",
+        "    fastsolver = FBSDESolver(pde,[256]*4 ,0.001,'DTNN')\n",
+        "    loss , init = fastsolver.solve(iterations,128,torch.mean(0 + torch.rand(1)*0).to(device),device)\n",
+        "    dtnnloss.append(loss)\n",
+        "    dtnninit.append(init)\n",
+        "  deepbsdeloss = []\n",
+        "  deepbsdeinit = []\n",
+        "\n",
+        "  for i in range(experiments):\n",
+        "    fastsolver = FBSDESolver(pde,[100] + 2*[110] + [100] ,0.001,'DeepBSDE')\n",
+        "    loss , init = fastsolver.solve(iterations,128,torch.mean(0 + torch.rand(1)*0).to(device),device)\n",
+        "    deepbsdeloss.append(loss)\n",
+        "    deepbsdeinit.append(init)\n",
+        "\n",
+        "  fbsnnloss = []\n",
+        "  fbsnninit = []\n",
+        "\n",
+        "  for i in range(experiments):\n",
+        "    fastsolver = FBSNNolver(pde,[pde.dim + 1] + [256] * 4 + [1],0.001)\n",
+        "    loss , init = fastsolver.solve(iterations,128,(40 + torch.rand(1)*10).to(device),device)\n",
+        "    fbsnnloss.append(loss)\n",
+        "    fbsnninit.append(init)\n",
+        "\n",
+        "  methods = ['DTNN', 'DeepBSDE', 'FBSNN']\n",
+        "  data = {\n",
+        "    'DTNN' : np.array(dtnninit),\n",
+        "    'DeepBSDE' : np.squeeze(np.array(deepbsdeinit)),\n",
+        "    'FBSNN' : np.array(fbsnninit),\n",
+        "    'DTNN_loss':  np.squeeze(np.array(dtnnloss)),\n",
+        "    'DeepBSDE_loss':  np.squeeze(np.array(deepbsdeloss)) ,\n",
+        "    'FBSNN_loss':  np.squeeze(np.array(fbsnnloss))\n",
+        "  }\n",
+        "\n",
+        "  #np.save(name + '.npy', data)\n",
+        "\n",
+        "  return data\n"
+      ],
+      "metadata": {
+        "id": "_UBWBWHzv6bd"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def plot_fig_init(data , name = \"default_main\" , exact_sol = 57.3 , x1= 1, y1 = 1 , x2 = 1, y2 = 1):\n",
+        "  methods = ['DTNN', 'DeepBSDE', 'FBSNN']\n",
+        "  fig = go.Figure()\n",
+        "  c = ['green' , 'blue' , 'red']\n",
+        "\n",
+        "  # Adding traces for each method\n",
+        "  i = 0\n",
+        "  for method in methods:\n",
+        "      mean_curve = np.mean(data[method], axis=0)\n",
+        "      std_curve = np.std(data[method], axis=0)\n",
+        "      upper_bound = mean_curve + 2*std_curve\n",
+        "      lower_bound = mean_curve - 2*std_curve\n",
+        "\n",
+        "      # Upper bound - invisible, used only for shading\n",
+        "      x = list(range(1, iterations + 1))\n",
+        "      trace_upper_bound = go.Scatter(\n",
+        "            name='',\n",
+        "            x=x,\n",
+        "            y= upper_bound,\n",
+        "            mode='lines',\n",
+        "            marker=dict(color=\"#444\"),\n",
+        "            line=dict(width=0),\n",
+        "            showlegend=False\n",
+        "      )\n",
+        "\n",
+        "      # Lower bound - fill area between the upper bound\n",
+        "      trace_lower_bound = go.Scatter(\n",
+        "            name='',\n",
+        "            x=x,\n",
+        "            y=lower_bound,\n",
+        "            marker=dict(color=\"#444\"),\n",
+        "            line=dict(width=0),\n",
+        "            mode='lines',\n",
+        "            fillcolor='rgba(128, 128, 128, 0.3)',\n",
+        "            fill='tonexty',\n",
+        "            showlegend=False\n",
+        "      )\n",
+        "\n",
+        "      # Mean curve\n",
+        "      trace_mean_curve = go.Scatter(name=method,\n",
+        "          x=x,\n",
+        "          y=mean_curve,\n",
+        "          mode='lines',\n",
+        "          line=dict(color=c[i]),\n",
+        "      )\n",
+        "      i += 1\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "      fig.add_trace(trace_mean_curve)\n",
+        "      fig.add_trace(trace_upper_bound)\n",
+        "      fig.add_trace(trace_lower_bound)\n",
+        "\n",
+        "\n",
+        "  # Updating layout with gray background for the plot area only\n",
+        "  exactsol = go.Scatter(name='Exact solution',\n",
+        "          x=x,\n",
+        "          y=np.ones(len(x)) * exact_sol,\n",
+        "          mode='lines',\n",
+        "          line=dict(color='black', width=2, dash='dash'),\n",
+        "  )\n",
+        "  fig.add_trace(exactsol)\n",
+        "  fig.update_layout(\n",
+        "      title={\n",
+        "          'text': '',\n",
+        "          'y':0.9,\n",
+        "          'x':0.5,\n",
+        "          'xanchor': 'center',\n",
+        "          'yanchor': 'top'\n",
+        "      },\n",
+        "      title_font=dict(size=22, family=\"Times New Roman\"),\n",
+        "      xaxis=dict(\n",
+        "          title='Iteration',\n",
+        "          titlefont=dict(size=24, family=\"Times New Roman\"),\n",
+        "          tickfont=dict(size=24, family=\"Times New Roman\"),\n",
+        "      ),\n",
+        "      yaxis=dict(\n",
+        "          title=r'$u(0,X_0)$',\n",
+        "          titlefont=dict(size=30, family=\"Times New Roman\"),\n",
+        "          tickfont=dict(size=24, family=\"Times New Roman\"),\n",
+        "      ),\n",
+        "      legend=dict(\n",
+        "          title='',\n",
+        "          title_font=dict(size=24, family=\"Times New Roman\"),\n",
+        "          font=dict(size=28, family=\"Times New Roman\"),\n",
+        "          bgcolor='rgba(255,255,255,0.5)',\n",
+        "          bordercolor=\"Black\",\n",
+        "          borderwidth=2,\n",
+        "        x=x1,  # Positioning on the x-axis (1 is at the far right of the graph)\n",
+        "        xanchor='auto',  # Anchoring the legend\n",
+        "        y=y1,  # Positioning on the y-axis (1 is at the top of the graph)\n",
+        "        yanchor='auto'  # Anchoring the legend\n",
+        "\n",
+        "    )\n",
+        ")\n",
+        "  fig.update_layout(\n",
+        "      width=233 * 6,  # Width of the plot in pixels\n",
+        "      height=92 * 6  # Height of the plot in pixels\n",
+        "  )\n",
+        "\n",
+        "\n",
+        "    # Saving the figure as a high-quality image (300 dpi)\n",
+        "  fig.write_image(\"/content/drive/MyDrive/DTNN/figs/\"+ name + \"_init.png\")  # PNG format, scale factor can adjust the resolution\n",
+        "\n",
+        "  # To display in the notebook (or inline environment)\n",
+        "  fig.show()\n",
+        "\n",
+        "\n",
+        "def plot_fig_loss(data , name = \"default_main\" , exact_sol = 57.3 , x1= 1, y1 = 1 , x2 = 1, y2 = 1):\n",
+        "  methods = ['DTNN_loss', 'DeepBSDE_loss', 'FBSNN_loss']\n",
+        "  methods_name = ['DTNN', 'DeepBSDE', 'FBSNN']\n",
+        "  fig = go.Figure()\n",
+        "  c = ['green' , 'blue' , 'red']\n",
+        "  method\n",
+        "\n",
+        "  # Adding traces for each method\n",
+        "  i = 0\n",
+        "  for method in methods:\n",
+        "      mean_curve = np.mean(np.log(data[method]), axis=0)\n",
+        "      std_curve = np.std(np.log(data[method]), axis=0)\n",
+        "      upper_bound = mean_curve + 2*std_curve\n",
+        "      lower_bound = mean_curve - 2*std_curve\n",
+        "\n",
+        "      # Upper bound - invisible, used only for shading\n",
+        "      x = list(range(1, iterations + 1))\n",
+        "      trace_upper_bound = go.Scatter(\n",
+        "            name='',\n",
+        "            x=x,\n",
+        "            y= upper_bound,\n",
+        "            mode='lines',\n",
+        "            marker=dict(color=\"#444\"),\n",
+        "            line=dict(width=0),\n",
+        "            showlegend=False\n",
+        "      )\n",
+        "\n",
+        "      # Lower bound - fill area between the upper bound\n",
+        "      trace_lower_bound = go.Scatter(\n",
+        "            name='',\n",
+        "            x=x,\n",
+        "            y=lower_bound,\n",
+        "            marker=dict(color=\"#444\"),\n",
+        "            line=dict(width=0),\n",
+        "            mode='lines',\n",
+        "            fillcolor='rgba(128, 128, 128, 0.3)',\n",
+        "            fill='tonexty',\n",
+        "            showlegend=False\n",
+        "      )\n",
+        "\n",
+        "      # Mean curve\n",
+        "      trace_mean_curve = go.Scatter(name=methods_name[i],\n",
+        "          x=x,\n",
+        "          y=mean_curve,\n",
+        "          mode='lines',\n",
+        "          line=dict(color=c[i]),\n",
+        "      )\n",
+        "      i += 1\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "      fig.add_trace(trace_mean_curve)\n",
+        "      fig.add_trace(trace_upper_bound)\n",
+        "      fig.add_trace(trace_lower_bound)\n",
+        "\n",
+        "\n",
+        "  # Updating layout with gray background for the plot area only\n",
+        "  fig.update_layout(\n",
+        "      title={\n",
+        "          'text': '',\n",
+        "          'y':0.9,\n",
+        "          'x':0.5,\n",
+        "          'xanchor': 'center',\n",
+        "          'yanchor': 'top'\n",
+        "      },\n",
+        "      title_font=dict(size=22, family=\"Times New Roman\"),\n",
+        "      xaxis=dict(\n",
+        "          title='Iteration',\n",
+        "          titlefont=dict(size=24, family=\"Times New Roman\"),\n",
+        "          tickfont=dict(size=24, family=\"Times New Roman\"),\n",
+        "      ),\n",
+        "      yaxis=dict(\n",
+        "          title='Log loss',\n",
+        "          titlefont=dict(size=30, family=\"Times New Roman\"),\n",
+        "          tickfont=dict(size=24, family=\"Times New Roman\"),\n",
+        "      ),\n",
+        "      legend=dict(\n",
+        "          title='',\n",
+        "          title_font=dict(size=24, family=\"Times New Roman\"),\n",
+        "          font=dict(size=28, family=\"Times New Roman\"),\n",
+        "          bgcolor='rgba(255,255,255,0.5)',\n",
+        "          bordercolor=\"Black\",\n",
+        "          borderwidth=2,\n",
+        "        x=x2,  # Positioning on the x-axis (1 is at the far right of the graph)\n",
+        "        xanchor='auto',  # Anchoring the legend\n",
+        "        y=y2,  # Positioning on the y-axis (1 is at the top of the graph)\n",
+        "        yanchor='auto'  # Anchoring the legend\n",
+        "\n",
+        "    )\n",
+        ")\n",
+        "  fig.update_layout(\n",
+        "      width=233 * 6,  # Width of the plot in pixels\n",
+        "      height=92 * 6  # Height of the plot in pixels\n",
+        "  )\n",
+        "\n",
+        "\n",
+        "    # Saving the figure as a high-quality image (300 dpi)\n",
+        "  fig.write_image(\"/content/drive/MyDrive/DTNN/figs/\"+ name + \"_loss.png\", scale=3)  # PNG format, scale factor can adjust the resolution\n",
+        "\n",
+        "  # To display in the notebook (or inline environment)\n",
+        "  fig.show()"
+      ],
+      "metadata": {
+        "id": "w9vnEZcTxmtL"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Defualt Risk"
+      ],
+      "metadata": {
+        "id": "gnwqTPi8wvhD"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from RiskLabAI.pde.equation import PricingDefaultRisk\n",
+        "\n",
+        "config = {\n",
+        "  \"dim\": 100,\n",
+        "  \"total_time\": 1,\n",
+        "  \"num_time_interval\": 50\n",
+        "}\n",
+        "pde = PricingDefaultRisk(config)\n",
+        "\n",
+        "data = plot_and_save_result(pde)"
+      ],
+      "metadata": {
+        "id": "-JbXPLYPwd9M"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "or"
+      ],
+      "metadata": {
+        "id": "21BtH2KqyV2y"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# np.load(\"/content/drive/MyDrive/DTNN/\" + name, allow_pickle=True).item()"
+      ],
+      "metadata": {
+        "id": "qwV8uuygyW-n"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plot_fig_init(data)"
+      ],
+      "metadata": {
+        "id": "81qsWEl1yfh9"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plot_fig_loss(data)"
+      ],
+      "metadata": {
+        "id": "21-kovyjzLg0"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# BlackScholesBarenblatt"
+      ],
+      "metadata": {
+        "id": "TrsBTn77zYH_"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from RiskLabAI.pde.equation import BlackScholesBarenblatt"
+      ],
+      "metadata": {
+        "id": "G1Mf5zhT1whL"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# completed\n",
+        "\n",
+        "config = {\n",
+        "  \"dim\": 100,\n",
+        "  \"total_time\": 1,\n",
+        "  \"num_time_interval\": 50\n",
+        "}\n",
+        "pde = BlackScholesBarenblatt(config)\n",
+        "\n",
+        "\n",
+        "\n",
+        "data = plot_and_save_result(pde )\n",
+        "\n",
+        "# np.load(\"/content/drive/MyDrive/DTNN/\" + name, allow_pickle=True).item()"
+      ],
+      "metadata": {
+        "id": "BaaGkh6Jzczh"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plot_fig_init(data , 'BlackScholesBarenblatt')"
+      ],
+      "metadata": {
+        "id": "WpsM10eHznDH"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plot_fig_loss(data , 'BlackScholesBarenblatt')"
+      ],
+      "metadata": {
+        "id": "z9JTfwm5zorz"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Max-Min Spread"
+      ],
+      "metadata": {
+        "id": "BYEIcFPpz0Ht"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "class BlackScholesBarenblattMaxMin(BlackScholesBarenblatt):\n",
+        "  \"\"\"\n",
+        "  Args:\n",
+        "  eqn_config (dict): dictionary containing PDE configuration parameters\n",
+        "  \"\"\"\n",
+        "  def __init__(self, eqn_config):\n",
+        "    super(BlackScholesBarenblattMaxMin, self).__init__(eqn_config)\n",
+        "    self.x_init = np.ones(self.dim) * np.array([1.0 / (1.0 + i % 2) for i in range(self.dim)]) * 1\n",
+        "  def terminal(self, t, x)-> torch.Tensor:\n",
+        "    \"\"\"\n",
+        "    Terminal condition of the PDE.\n",
+        "\n",
+        "    Args:\n",
+        "    t (float): current time\n",
+        "    x (torch.Tensor): tensor of size [batch_size, dim] containing space coordinates\n",
+        "\n",
+        "    Returns:\n",
+        "    torch.Tensor: tensor of size [batch_size, 1] containing terminal values\n",
+        "    \"\"\"\n",
+        "    return nn.ReLU()(torch.max(x, 1)[0] - torch.min(x, 1)[0])\n",
+        "config = {\n",
+        "  \"dim\": 100,\n",
+        "  \"total_time\": 1,\n",
+        "  \"num_time_interval\": 50\n",
+        "}\n",
+        "pde = BlackScholesBarenblattMaxMin(config)\n",
+        "\n",
+        "\n",
+        "\n",
+        "data = plot_and_save_result(pde)\n",
+        "# np.load(\"/content/drive/MyDrive/DTNN/\" + name, allow_pickle=True).item()\n",
+        "plot_fig_init(data , 'BlackScholesBarenblatt_maxmin')\n"
+      ],
+      "metadata": {
+        "id": "GZC_3b14z3jG"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plot_fig_loss(data , 'BlackScholesBarenblatt_maxmin')"
+      ],
+      "metadata": {
+        "id": "e6fHGTge0P83"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Basket"
+      ],
+      "metadata": {
+        "id": "u0SxEFKp0ZP_"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# re-run\n",
+        "\n",
+        "class BlackScholesBarenblattBasket(BlackScholesBarenblatt):\n",
+        "  \"\"\"\n",
+        "  Args:\n",
+        "  eqn_config (dict): dictionary containing PDE configuration parameters\n",
+        "  \"\"\"\n",
+        "  def __init__(self, eqn_config):\n",
+        "    super(BlackScholesBarenblattBasket, self).__init__(eqn_config)\n",
+        "    self.x_init = np.ones(self.dim) * np.array([1.0 / (1.0 + i % 2) for i in range(self.dim)]) * 1\n",
+        "  def terminal(self, t, x)-> torch.Tensor:\n",
+        "    \"\"\"\n",
+        "    Terminal condition of the PDE.\n",
+        "\n",
+        "    Args:\n",
+        "    t (float): current time\n",
+        "    x (torch.Tensor): tensor of size [batch_size, dim] containing space coordinates\n",
+        "\n",
+        "    Returns:\n",
+        "    torch.Tensor: tensor of size [batch_size, 1] containing terminal values\n",
+        "    \"\"\"\n",
+        "    return nn.ReLU()(torch.mean(x, 1))\n",
+        "config = {\n",
+        "  \"dim\": 100,\n",
+        "  \"total_time\": 1,\n",
+        "  \"num_time_interval\": 50\n",
+        "}\n",
+        "pde = BlackScholesBarenblattBasket(config)\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "data = plot_and_save_result(pde)\n",
+        "plot_fig_init(data , 'BlackScholesBarenblatt_basket')\n"
+      ],
+      "metadata": {
+        "id": "CS2qZB7T0ZxH"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plot_fig_loss(data , 'BlackScholesBarenblatt_basket')"
+      ],
+      "metadata": {
+        "id": "GASMDlik0ca7"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Best-of"
+      ],
+      "metadata": {
+        "id": "nOhn84uw0qSl"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# re-run\n",
+        "\n",
+        "class BlackScholesBarenblattBestof(BlackScholesBarenblatt):\n",
+        "  \"\"\"\n",
+        "  Args:\n",
+        "  eqn_config (dict): dictionary containing PDE configuration parameters\n",
+        "  \"\"\"\n",
+        "  def __init__(self, eqn_config):\n",
+        "    super(BlackScholesBarenblattBestof, self).__init__(eqn_config)\n",
+        "    self.x_init = np.ones(self.dim) * np.array([1.0 / (1.0 + i % 2) for i in range(self.dim)]) * 1\n",
+        "  def terminal(self, t, x)-> torch.Tensor:\n",
+        "    \"\"\"\n",
+        "    Terminal condition of the PDE.\n",
+        "\n",
+        "    Args:\n",
+        "    t (float): current time\n",
+        "    x (torch.Tensor): tensor of size [batch_size, dim] containing space coordinates\n",
+        "\n",
+        "    Returns:\n",
+        "    torch.Tensor: tensor of size [batch_size, 1] containing terminal values\n",
+        "    \"\"\"\n",
+        "    return nn.ReLU()(torch.max(x, 1)[0] )\n",
+        "config = {\n",
+        "  \"dim\": 100,\n",
+        "  \"total_time\": 1,\n",
+        "  \"num_time_interval\": 50\n",
+        "}\n",
+        "pde = BlackScholesBarenblattBestof(config)\n",
+        "\n",
+        "\n",
+        "data = plot_and_save_result(pde)\n",
+        "plot_fig_init(data,'BlackScholesBarenblatt_bestof' )\n"
+      ],
+      "metadata": {
+        "id": "5HIWfsce0qpc"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plot_fig_loss(data , 'BlackScholesBarenblatt_bestof')"
+      ],
+      "metadata": {
+        "id": "T1NZAS7-0vce"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# PricingDiffRate"
+      ],
+      "metadata": {
+        "id": "FzbggKGs1GS3"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from RiskLabAI.pde.equation import PricingDiffRate"
+      ],
+      "metadata": {
+        "id": "jt32wWL41zyG"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# completed\n",
+        "\n",
+        "config = {\n",
+        "  \"dim\": 100,\n",
+        "  \"total_time\": 0.5,\n",
+        "  \"num_time_interval\": 50\n",
+        "}\n",
+        "pde = PricingDiffRate(config)\n",
+        "\n",
+        "data = plot_and_save_result(pde)\n",
+        "plot_fig_init(data,'PricingDiffRate' )\n"
+      ],
+      "metadata": {
+        "id": "2u6hnVxz1NDY"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plot_fig_loss(data , 'PricingDiffRate')"
+      ],
+      "metadata": {
+        "id": "TUe7Hi9N1Q3x"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# HJB"
+      ],
+      "metadata": {
+        "id": "3Ytqm1VD1bsf"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from RiskLabAI.pde.equation import HJBLQ"
+      ],
+      "metadata": {
+        "id": "hd5ntBaq14IJ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "config = {\n",
+        "  \"dim\": 100,\n",
+        "  \"total_time\": 1,\n",
+        "  \"num_time_interval\": 50\n",
+        "}\n",
+        "pde = HJBLQ(config)\n",
+        "\n",
+        "data = plot_and_save_result(pde)\n",
+        "plot_fig_init(data,'HJB' )\n"
+      ],
+      "metadata": {
+        "id": "yl9ZhLwH1cxo"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plot_fig_loss(data , 'HJB')"
+      ],
+      "metadata": {
+        "id": "DglKAoif1f4T"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
