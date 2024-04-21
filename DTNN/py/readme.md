@@ -114,13 +114,11 @@ In this subsection, we explore option pricing under the assumption of different 
 
 $$
 \begin{align*}
-
 & dX_t = \bar{\mu} X_t dt + \bar{\sigma} \text{diag}(X_t) dW_t,  \\
 & X_0 = \xi,  \\
-& dY_t = \Bigl(R^l Y_t + \frac{(\bar{\mu} - R^l)}{\bar{\sigma}} \sum_{i=1}^d z_i \\
-& \quad + (R^l - R^b) \max \left\{0, \left[\frac{1}{\bar{\sigma}} \sum_{i=1}^d z_i\right] - Y_t\right\}\Bigr) dt + Z_t^T dW_t,  \\
+& dY_t = (R^l Y_t + \frac{(\bar{\mu} - R^l)}{\bar{\sigma}} \sum_{i=1}^d z_i \\
+& \quad + (R^l - R^b) \max \left\{0, \left[\frac{1}{\bar{\sigma}} \sum_{i=1}^d z_i\right] - Y_t\right\}) dt + Z_t^T dW_t,  \\
 & Y_T = g\left(X_T\right).
-
 \end{align*}
 $$
 
@@ -143,7 +141,7 @@ The terminal condition for the option is defined by the payoff function:
 
 $$
 \begin{align*}
-g(x) = \max &\Bigg\{\left[\max _{1 \leq i \leq 100} x_i\right] - 120, 0\Bigg\} \nonumber \\
+g(x) = \max & \left\{\left[\max _{1 \leq i \leq 100} x_i\right] - 120, 0 \right \} \nonumber \\
 & - 2 \max \left\{\left[\max _{1 \leq i \leq 100} x_i\right] - 150, 0\right\}.
 \end{align*}
 $$
@@ -159,7 +157,7 @@ The Black-Scholes-Barenblatt (BSB) equation extends the classical Black-Scholes 
 
 $$
 \begin{align*}
-d X_t & = \bar{\sigma} \operatorname{diag}(X_t) d W_t, \\
+d X_t & = \bar{\sigma} \text{diag}(X_t) d W_t, \\
 X_0 & = \xi, \\
 d Y_t & = r\left(Y_t - \frac{1}{\bar{\sigma}} J^T Z_t\right) dt + Z_t^{\prime} d W_t, \\
 Y_T & = g(X_T).
