@@ -85,11 +85,12 @@ $$
 ### Option Price Equation
 
 The defualt rate is described by the function $Q(Y_t)$, which is defined as:
+
 $$
-\begin{align}
+\begin{aligned}
 Q(y) &= \mathbb{I}_{\left(-\infty, v^h\right)}(y) \gamma^h + \mathbb{I}_{\left[v^l, \infty\right)}(y) \gamma^l \nonumber \\
 & + \mathbb{I}_{\left[v^h, v^l\right)}(y)\left[\frac{\left(\gamma^h - \gamma^l\right)}{\left(v^h - v^l\right)}\left(y - v^h\right) + \gamma^h \right].
-\end{align}
+\end{aligned}
 $$
 
 ### Parameters
