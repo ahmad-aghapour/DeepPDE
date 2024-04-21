@@ -157,7 +157,7 @@ The Black-Scholes-Barenblatt (BSB) equation extends the classical Black-Scholes 
 
 $$
 \begin{align*}
-d X_t & = \bar{\sigma} \text{diag}(X_t) d W_t, \\
+d X_t & = \bar{\sigma} \  diag(X_t) d W_t, \\
 X_0 & = \xi, \\
 d Y_t & = r\left(Y_t - \frac{1}{\bar{\sigma}} J^T Z_t\right) dt + Z_t^{\prime} d W_t, \\
 Y_T & = g(X_T).
@@ -175,11 +175,7 @@ Adopting parameter settings from the literature, we set:
 - Initial state vector, $\xi = (1, 0.5, \ldots, 1, 0.5)$
 
 The terminal payoff condition is defined as:
-$$
-
-    g(x) = \|x\|^2.
-
-$$
+$$g(x) = ||x||^2. $$
 <p align="center">
   <img src="figs\BlackScholesBarenblatt_init.png" alt="First Image" width="45%"/>
   <img src="figs\BlackScholesBarenblatt_loss.png" alt="Second Image" width="45%"/>
