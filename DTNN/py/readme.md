@@ -117,7 +117,7 @@ $$
 & dX_t = \bar{\mu} X_t dt + \bar{\sigma} \text{diag}(X_t) dW_t,  \\
 & X_0 = \xi,  \\
 & dY_t = (R^l Y_t + \frac{(\bar{\mu} - R^l)}{\bar{\sigma}} \sum_{i=1}^d z_i \\
-& \quad + (R^l - R^b) \max \left\{0, \left[\frac{1}{\bar{\sigma}} \sum_{i=1}^d z_i\right] - Y_t\right\}) dt + Z_t^T dW_t,  \\
+& \quad + (R^l - R^b) \max \left\lbrace 0, \left[ \frac{1}{\bar{\sigma}} \sum_{i=1}^d z_i\right] - Y_t\right \rbrace) dt + Z_t^T dW_t,  \\
 & Y_T = g\left(X_T\right).
 \end{align*}
 $$
@@ -141,8 +141,8 @@ The terminal condition for the option is defined by the payoff function:
 
 $$
 \begin{align*}
-g(x) = \max & \left\{\left[\max _{1 \leq i \leq 100} x_i\right] - 120, 0 \right \} \nonumber \\
-& - 2 \max \left\{\left[\max _{1 \leq i \leq 100} x_i\right] - 150, 0\right\}.
+g(x) = \max & \left\lbrace \left[\max _{1 \leq i \leq 100} x_i\right] - 120, 0 \right \rbrace \nonumber \\
+& - 2 \max \left\lbrace \left[\max _{1 \leq i \leq 100} x_i\right] - 150, 0\right\rbrace.
 \end{align*}
 $$
 <p align="center">
