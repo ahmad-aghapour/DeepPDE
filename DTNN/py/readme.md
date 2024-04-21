@@ -102,8 +102,8 @@ $$ Q(y) = I_{\left(-\infty, v^h\right)}(y) \gamma^h+I_{\left[v^l, \infty\right)}
 - Default intensity for low price, $\gamma^l = 0.02$
 - Terminal condition for the worst-of option with strike price $K = 0$
 <p align="center">
-  <img src="figs\default_main_init.png" alt="First Image" width="49%" height = "220"/>
-  <img src="figs\default_main_loss.png" alt="Second Image" width="49%" height = "220"/>
+  <img src="figs\default_main_init.png" alt="First Image" width="49%" height = "250"/>
+  <img src="figs\default_main_loss.png" alt="Second Image" width="49%" height = "250"/>
 </p>
 
 
@@ -146,8 +146,8 @@ g(x) = \max & \left\lbrace \left[\max _{1 \leq i \leq 100} x_i\right] - 120, 0 \
 \end{align*}
 $$
 <p align="center">
-  <img src="figs\PricingDiffRate_init.png" alt="First Image" width="45%"/>
-  <img src="figs\PricingDiffRate_loss.png" alt="Second Image" width="45%"/>
+  <img src="figs\PricingDiffRate_init.png" alt="First Image" width="49%" height = "250"/>
+  <img src="figs\PricingDiffRate_loss.png" alt="Second Image" width="49%" height = "250"/>
 </p>
 
 ## Black-Scholes-Barenblatt Equation
@@ -177,8 +177,8 @@ Adopting parameter settings from the literature, we set:
 The terminal payoff condition is defined as:
 $$g(x) = ||x||^2. $$
 <p align="center">
-  <img src="figs\BlackScholesBarenblatt_init.png" alt="First Image" width="45%"/>
-  <img src="figs\BlackScholesBarenblatt_loss.png" alt="Second Image" width="45%"/>
+  <img src="figs\BlackScholesBarenblatt_init.png" alt="First Image" width="49%" height = "250"/>
+  <img src="figs\BlackScholesBarenblatt_loss.png" alt="Second Image" width="49%" height = "250"/>
 </p>
 
 
@@ -194,8 +194,8 @@ $$
 where $S_i(T)$ represents the price of the $i$-th underlying asset at maturity, $w_i$ is the weighting factor for each asset, $n$ is the total number of underlying assets, and $K$ is the strike price. We set each $w_i$ to $\frac{1}{n}$ and $K = 0$.
 
 <p align="center">
-  <img src="figs\BlackScholesBarenblatt_basket_init.png" alt="First Image" width="45%"/>
-  <img src="figs\BlackScholesBarenblatt_basket_loss.png" alt="Second Image" width="45%"/>
+  <img src="figs\BlackScholesBarenblatt_basket_init.png" alt="First Image" width="49%" height = "250"/>
+  <img src="figs\BlackScholesBarenblatt_basket_loss.png" alt="Second Image" width="49%" height = "250"/>
 </p>
 ### Max-Min Spread Option
 
@@ -208,8 +208,8 @@ $$
 Here, $K$ is set to 0.
 
 <p align="center">
-  <img src="figs\BlackScholesBarenblatt_maxmin_init.png" alt="First Image" width="45%"/>
-  <img src="figs\BlackScholesBarenblatt_maxmin_loss.png" alt="Second Image" width="45%"/>
+  <img src="figs\BlackScholesBarenblatt_maxmin_init.png" alt="First Image" width="49%"  height = "250"/>
+  <img src="figs\BlackScholesBarenblatt_maxmin_loss.png" alt="Second Image" width="49%" height = "250"/>
 </p>
 
 ### Best-of Option
@@ -223,8 +223,8 @@ $$
 Again, $K$ is set to 0 for this analysis.
 
 <p align="center">
-  <img src="figs\BlackScholesBarenblatt_bestof_init.png" alt="First Image" width="45%"/>
-  <img src="figs\BlackScholesBarenblatt_bestof_loss.png" alt="Second Image" width="45%"/>
+  <img src="figs\BlackScholesBarenblatt_bestof_init.png" alt="First Image" width="49%" height = "250"/>
+  <img src="figs\BlackScholesBarenblatt_bestof_loss.png" alt="Second Image" width="49%" height = "250"/>
 </p>
 
 
@@ -255,6 +255,6 @@ $$g(x)=\ln \left(0.5\left(1+\|x\|^2\right)\right)$$
 
 with the terminal condition $u(T, x) = g(x)$.
 <p align="center">
-  <img src="figs\HJB_init.png" alt="First Image" width="45%"/>
-  <img src="figs\HJB_loss.png" alt="Second Image" width="45%"/>
+  <img src="figs\HJB_init.png" alt="First Image" width="49%" height = "250"/>
+  <img src="figs\HJB_loss.png" alt="Second Image" width="49%" height = "250"/>
 </p>
