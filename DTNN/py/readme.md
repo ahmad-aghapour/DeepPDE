@@ -85,12 +85,150 @@ $$
 ### Option Price Equation
 
 The defualt rate is described by the function $Q(Y_t)$, which is defined as:
-$$
-\begin{align*}
-Q(y) &= \mathbb{I}_{\left(-\infty, v^h\right)}(y) \gamma^h + \mathbb{I}_{\left[v^l, \infty\right)}(y) \gamma^l  \\
-& + \mathbb{I}_{\left[v^h, v^l\right)}(y)\left[\frac{\left(\gamma^h - \gamma^l\right)}{\left(v^h - v^l\right)}\left(y - v^h\right) + \gamma^h \right].
-\end{align*}
-$$
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt">
+    <mtr>
+      <mtd>
+        <mi>Q</mi>
+        <mo stretchy="false">(</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mtd>
+      <mtd>
+        <mi></mi>
+        <mo>=</mo>
+        <msub>
+          <mrow>
+            <mi mathvariant="double-struck">I</mi>
+          </mrow>
+          <mrow>
+            <mrow data-mjx-texclass="INNER">
+              <mo data-mjx-texclass="OPEN">(</mo>
+              <mo>−</mo>
+              <mi mathvariant="normal">∞</mi>
+              <mo>,</mo>
+              <msup>
+                <mi>v</mi>
+                <mi>h</mi>
+              </msup>
+              <mo data-mjx-texclass="CLOSE">)</mo>
+            </mrow>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <msup>
+          <mi>γ</mi>
+          <mi>h</mi>
+        </msup>
+        <mo>+</mo>
+        <msub>
+          <mrow>
+            <mi mathvariant="double-struck">I</mi>
+          </mrow>
+          <mrow>
+            <mrow data-mjx-texclass="INNER">
+              <mo data-mjx-texclass="OPEN">[</mo>
+              <msup>
+                <mi>v</mi>
+                <mi>l</mi>
+              </msup>
+              <mo>,</mo>
+              <mi mathvariant="normal">∞</mi>
+              <mo data-mjx-texclass="CLOSE">)</mo>
+            </mrow>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <msup>
+          <mi>γ</mi>
+          <mi>l</mi>
+        </msup>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd></mtd>
+      <mtd>
+        <mi></mi>
+        <mo>+</mo>
+        <msub>
+          <mrow>
+            <mi mathvariant="double-struck">I</mi>
+          </mrow>
+          <mrow>
+            <mrow data-mjx-texclass="INNER">
+              <mo data-mjx-texclass="OPEN">[</mo>
+              <msup>
+                <mi>v</mi>
+                <mi>h</mi>
+              </msup>
+              <mo>,</mo>
+              <msup>
+                <mi>v</mi>
+                <mi>l</mi>
+              </msup>
+              <mo data-mjx-texclass="CLOSE">)</mo>
+            </mrow>
+          </mrow>
+        </msub>
+        <mo stretchy="false">(</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <mrow data-mjx-texclass="INNER">
+          <mo data-mjx-texclass="OPEN">[</mo>
+          <mfrac>
+            <mrow data-mjx-texclass="INNER">
+              <mo data-mjx-texclass="OPEN">(</mo>
+              <msup>
+                <mi>γ</mi>
+                <mi>h</mi>
+              </msup>
+              <mo>−</mo>
+              <msup>
+                <mi>γ</mi>
+                <mi>l</mi>
+              </msup>
+              <mo data-mjx-texclass="CLOSE">)</mo>
+            </mrow>
+            <mrow data-mjx-texclass="INNER">
+              <mo data-mjx-texclass="OPEN">(</mo>
+              <msup>
+                <mi>v</mi>
+                <mi>h</mi>
+              </msup>
+              <mo>−</mo>
+              <msup>
+                <mi>v</mi>
+                <mi>l</mi>
+              </msup>
+              <mo data-mjx-texclass="CLOSE">)</mo>
+            </mrow>
+          </mfrac>
+          <mrow data-mjx-texclass="INNER">
+            <mo data-mjx-texclass="OPEN">(</mo>
+            <mi>y</mi>
+            <mo>−</mo>
+            <msup>
+              <mi>v</mi>
+              <mi>h</mi>
+            </msup>
+            <mo data-mjx-texclass="CLOSE">)</mo>
+          </mrow>
+          <mo>+</mo>
+          <msup>
+            <mi>γ</mi>
+            <mi>h</mi>
+          </msup>
+          <mo data-mjx-texclass="CLOSE">]</mo>
+        </mrow>
+        <mo>.</mo>
+      </mtd>
+    </mtr>
+  </mtable>
+</math>
 
 ### Parameters
 
