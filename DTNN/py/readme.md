@@ -86,8 +86,8 @@ $$
 
 The defualt rate is described by the function, which is defined as:
 
-$$ Q(y) = \mathbb{I}_{\left(-\infty, v^h\right)}(y) \gamma^h+\mathbb{I}_{\left[v^l, \infty\right)}(y) \gamma^l 
-+\mathbb{I}_{\left[v^h, v^l\right)}(y)\left[\frac{\left(\gamma^h-\gamma^l\right)}{\left(v^h-v^l\right)}\left(y-v^h\right)+\gamma^h\right].$$
+$$ Q(y) = I_{\left(-\infty, v^h\right)}(y) \gamma^h+I_{\left[v^l, \infty\right)}(y) \gamma^l 
++I_{\left[v^h, v^l\right)}(y)\left[\frac{\left(\gamma^h-\gamma^l\right)}{\left(v^h-v^l\right)}\left(y-v^h\right)+\gamma^h\right].$$
 
 ### Parameters
 
