@@ -102,8 +102,8 @@ $$ Q(y) = I_{\left(-\infty, v^h\right)}(y) \gamma^h+I_{\left[v^l, \infty\right)}
 - Default intensity for low price, $\gamma^l = 0.02$
 - Terminal condition for the worst-of option with strike price $K = 0$
 <p align="center">
-  <img src="figs\default_main_init.png" alt="First Image" width="49%" height = "150"/>
-  <img src="figs\default_main_loss.png" alt="Second Image" width="49%" height = "150"/>
+  <img src="figs\default_main_init.png" alt="First Image" width="49%" height = "200"/>
+  <img src="figs\default_main_loss.png" alt="Second Image" width="49%" height = "200"/>
 </p>
 
 
